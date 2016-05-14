@@ -1,6 +1,6 @@
 /*!
 timeSolver.js 
-version: v1.0.3
+version: v1.0.4-dev
 Author: Sean Chou
 
 A small date time tool in JavaScript
@@ -98,7 +98,7 @@ var timeSolver = (function () {
 			}
 			return d1.toString() === d2.toString();
 		},
-		between: function(d1, d2, type){
+		between: function(d1, d2, t){
 			if(t == undefined){
 				t = "MILLISECOND";
 			}
@@ -108,8 +108,8 @@ var timeSolver = (function () {
 			if(typeof d2 != "object"){
 				d2 = new Date(d2);
 			}
-			type = type.toUpperCase();
-			switch(type){
+			t = t.toUpperCase();
+			switch(t){
 				case "MILLISECOND":
 					return d2.getTime() - d1.getTime();
 				break;
@@ -136,6 +136,28 @@ var timeSolver = (function () {
 					return null;
 				break;
 			}
+		},
+		after: function(d1, d2, t){ //if d1 after d2 or not
+			if(t.between(d1,d2,t)>0){
+				return false;
+			}
+			else{
+				return true;
+			}
+		},
+		afterToday: function(d1){ //if d1 after today or not
+			return t.after(d1, new Date(), "Day");
+		},
+		before: function(d1, d2, t){ //if d1 before d2 or not
+			if(t.between(d1,d2,t)>0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		},
+		beforeToday: function(d1){ //if d1 before today or not
+			return t.before(d1, new Date(), "Day");
 		},
 		getString: function(d, f){
 			if(f == undefined){
