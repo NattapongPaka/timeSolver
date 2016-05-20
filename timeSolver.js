@@ -2,9 +2,8 @@
 timeSolver.js 
 version: v1.0.4-dev
 Author: Sean Chou
-
 A small date time tool in JavaScript
-see: https://github.com/sean1093/smallTool/ for details
+see: https://github.com/sean1093/timeSolver/ for details
 */
 
 var timeSolver = (function () {
@@ -33,8 +32,8 @@ var timeSolver = (function () {
 	//public 					
 	var t = {
 		add: function(d, c, t){
-			t = timeSolver._t(t);
-			d = timeSolver._v(d);			
+			t = _t(t);
+			d = _v(d);			
 			switch(t){
 				case "MILLISECOND":
 					return new Date(d.setMilliseconds(d.getMilliseconds()+c));
@@ -63,8 +62,8 @@ var timeSolver = (function () {
 			}
 		},
 		subtract: function(d, c, t){
-			t = timeSolver._t(t);
-			d = timeSolver._v(d);
+			t = _t(t);
+			d = _v(d);
 			switch(t){
 				case "MILLISECOND":
 					return new Date(d.setMilliseconds(d.getMilliseconds()-c));
@@ -94,14 +93,14 @@ var timeSolver = (function () {
 			}		
 		},
 		equal: function(d1, d2){ //return true or false
-			d1 = timeSolver._v(d1);
-			d2 = timeSolver._v(d2);
+			d1 = _v(d1);
+			d2 = _v(d2);
 			return d1.toString() === d2.toString();
 		},
 		between: function(d1, d2, t){
-			t = timeSolver._t(t);
-			d1 = timeSolver._v(d1);
-			d2 = timeSolver._v(d2);
+			t = _t(t);
+			d1 = _v(d1);
+			d2 = _v(d2);
 			switch(t){
 				case "MILLISECOND":
 					return d2.getTime() - d1.getTime();
@@ -157,7 +156,7 @@ var timeSolver = (function () {
 				f = "YYYYMMDD";
 			}
 			f = f.toUpperCase();
-			d = timeSolver._v(d);
+			d = _v(d);
 
 			var year = d.getFullYear();
 			var month = (d.getMonth()+1);
@@ -199,19 +198,19 @@ var timeSolver = (function () {
 			}
 		},
 		getAbbrWeek: function(d){ //return abbr. weekday name
-			d = timeSolver._v(d);
+			d = _v(d);
 			return d.toString().substring(0,3);
 		},
 		getFullWeek: function(d){ //return full weekday name
-			d = timeSolver._v(d);
+			d = _v(d);
 			return _w[d.getDay()];
 		},
 		getAbbrMonth: function(d){ //return abbr. month name
-			d = timeSolver._v(d);
+			d = _v(d);
 			return d.toString().substring(3,7);
 		},
 		getFullMonth: function(d){ //return full month name
-			d = timeSolver._v(d);
+			d = _v(d);
 			return _m[d.getMonth()];
 		},
 		isValid: function(st, f){ //input date string and return true/ false
@@ -255,5 +254,3 @@ var timeSolver = (function () {
 
     return t;
 }());
-
-
